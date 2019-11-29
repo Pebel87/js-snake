@@ -10,6 +10,10 @@ let isChangeingDirection = false;
 let score = 0;
 let gameTick = 600;
 
+let beep = new Audio("beep.wav")
+
+let eat = new Audio("eat.wav")
+
 function changeDirection(event){
 
     if (isChangeingDirection) return;
@@ -151,6 +155,7 @@ function moveSnake(){
     if (!snakeEaten()){
         snake.pop();
     }
+    beep.play();
 }
 
 function snakeEaten(){
@@ -159,6 +164,7 @@ function snakeEaten(){
         food[0].y = null;
         gameTick = gameTick -10;
         score = score +10;
+        eat.play();
         return true;
     }
     return false;
@@ -196,14 +202,15 @@ function main(){
     ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
     moveSnake();
     isChangeingDirection = false;
-    if (checkCollision()) {
-        alert("Game Over\nYour score: " + score);
-        location.reload();
-    }
+
     checkOutOfBounds();
     generateFood();
     drawFood();
     drawSnake();
+    if (checkCollision()) {
+        alert("Game Over\nYour score: " + score);
+        location.reload();
+    }
     gameTick = Math.max(100, gameTick);
    
     updateScore();
