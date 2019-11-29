@@ -11,6 +11,7 @@ let score = 0;
 let gameTick = 600;
 
 let beep = new Audio("beep.wav")
+beep.volume = 0.1;
 
 let eat = new Audio("eat.wav")
 
