@@ -215,7 +215,8 @@ function main(){
     drawSnake();
     if (checkCollision()) {
         alert("Game Over\nYour score: " + score);
-        location.reload();
+        return;
+        //location.reload();
     }
     gameTick = Math.max(100, gameTick);
    
