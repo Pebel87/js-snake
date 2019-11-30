@@ -153,9 +153,14 @@ function moveSnake(){
         y: snake[0].y + dy
     }
     snake.unshift(head);
+
+    checkOutOfBounds();
+
     if (!snakeEaten()){
         snake.pop();
     }
+    beep.pause();
+    beep.currentTime = 0;
     beep.play();
 }
 
@@ -165,6 +170,7 @@ function snakeEaten(){
         food[0].y = null;
         gameTick = gameTick -10;
         score = score +10;
+        //beep.pause();
         eat.play();
         return true;
     }
@@ -203,8 +209,7 @@ function main(){
     ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
     moveSnake();
     isChangeingDirection = false;
-
-    checkOutOfBounds();
+    //checkOutOfBounds();
     generateFood();
     drawFood();
     drawSnake();
@@ -216,6 +221,8 @@ function main(){
    
     updateScore();
     setTimeout(function(){
+        //gameTick = gameTick -10;
+        //score = score + 10;
         main();
     }, gameTick);
 };
